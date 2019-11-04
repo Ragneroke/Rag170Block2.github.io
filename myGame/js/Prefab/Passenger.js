@@ -14,6 +14,7 @@ function Passenger(game, x, y, key, frame, level, elevator, target, waitPos, sta
 	//Two triggers to detect waiting and loading conditions for passenger
 	this.onWait = false;
 	this.onLoad = false;
+	this.onExit = false;
 	//Set a waiting position for passenger
 	this.waitPos = waitPos;
 	//Set target level for passenger
@@ -42,13 +43,12 @@ Passenger.prototype.update = function(){
 		this.isOnQueue();
 	}else if(this.onWait && !this.onLoad){
 		this.isOnLoad();
-	}else if(this.onLoad){
+	}else if(this.onLoad && !this.onExit){
 		this.inElevator();
 
 	}
 
-	if(this.target == this.elevator.currentFloor && this.onLoad){
-		this.onLoad = false;
+	if(this.target == this.elevator.currentFloor){
 		this.leaveElevator();
 	}
 	//console.log(this.stopFloor);
@@ -95,12 +95,17 @@ Passenger.prototype.inElevator = function(){
 }
 
 Passenger.prototype.leaveElevator = function(){
-	this.body.velocity.x = -this.speed;
-	game.time.events.add(Phaser.Timer.SECOND * 2, this.killPassenger, this);
+	if(this.onLoad){
+		this.onExit = true;
+		this.body.velocity.x = -this.speed;
+		game.time.events.add(Phaser.Timer.SECOND * 2, this.killPassenger, this);
+	}
 }
 
 Passenger.prototype.killPassenger = function(){
+	this.onExit = false;
 	this.setScore();
+	this.onLoad = false;
 	this.motion.targetText.kill();
 	this.motion.kill();
 	this.kill();
