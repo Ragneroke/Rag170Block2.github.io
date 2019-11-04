@@ -47,7 +47,7 @@ Passenger.prototype.update = function(){
 
 	}
 
-	if(this.target == this.elevator.currentFloor){
+	if(this.target == this.elevator.currentFloor && this.onLoad){
 		this.onLoad = false;
 		this.leaveElevator();
 	}
