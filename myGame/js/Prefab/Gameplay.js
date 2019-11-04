@@ -7,9 +7,15 @@ function Gameplay(game){
 	this.Dorm.scale.y = 0.8;
 	//470 120
 
+	this.scoreText = game.add.text(10,10);
+	this.score = 0;
+	this.scoreText.setText('Score: ' + this.score);
+
+
 	this.elevator = new Elevator(game, 400, 470, 'Diamond', 1, 5, 470, 120);
 	game.add.existing(this.elevator);
 
-	this.test1 = new Passenger(game, 50, 470, 'slug', 1, 0, this.elevator, 3, 330);
+	this.test1 = new Passenger(game, 50, 470, 'slug', 1, 0, this.elevator, 3, 330,this);
 	game.add.existing(this.test1);
+
 }
