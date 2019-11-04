@@ -13,7 +13,8 @@ Load.prototype = {
 		game.load.image('downArrow', 'downArrow.png');
 		game.load.image('sheet', 'sheet.png');
 		game.load.image('DormA', 'DormA.png');
-		game.load.image('Diamond', 'Diamond.png');
+		game.load.image('Diamond', 'elevator.png');
+		game.load.spritesheet('slug', 'SlugBoi.png',32,48);
 		game.load.spritesheet('guitar', 'guitarCharacter.png', 1200, 1600);
 		game.load.spritesheet('singer', 'singerCharacter.png', 1200, 1600);
 		game.load.spritesheet('drumer', 'drumCharacter.png', 4000, 3000);

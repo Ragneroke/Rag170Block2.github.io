@@ -2,6 +2,8 @@ function Elevator(game, x, y, key, frame, level, lowLevel,highLevel) {
 	Phaser.Sprite.call(this, game, x, y, key, frame);
 	this.anchor.set(0.5);
 	game.physics.enable(this);
+	this.scale.x = 0.5;
+	this.scale.y = 0.5;
 	this.body.collideWorldBounds = false;
 	//Demo level is 5
 	this.level = level;
@@ -13,13 +15,16 @@ function Elevator(game, x, y, key, frame, level, lowLevel,highLevel) {
 	this.cond = 'move';
 	this.body.velocity.y = this.speed;
 	this.inputEnabled = true;
+	//Those two are triggers of stop elevator
 	this.stopFloor = null;
 	this.readyStop = false;
+
+	//The currentFloor represent the floor that elevator is stop at.
+	this.currentFloor = null;
 	this.levelArray = [];
 	for(var i = 0; i < this.level; ++i){
 		this.levelArray[i] = this.low - ((this.low - this.high) / (this.level - 1)) * i;
 	}
-	console.log(this.levelArray);
 
 
 }
@@ -36,7 +41,7 @@ Elevator.prototype.update = function(){
 	}
 	this.stopElevator();
 	this.checkFloor();
-	console.log(this.stopFloor);
+	//console.log(this.stopFloor);
 
 }
 Elevator.prototype.listener = function(){
@@ -75,11 +80,13 @@ Elevator.prototype.reverseSpeed = function(){
 	this.body.velocity.y = this.speed;
 }
 Elevator.prototype.checkFloor = function(){
-	if(this.body.y < this.levelArray[this.stopFloor] + 10 && this.body.y > this.levelArray[this.stopFloor] - 10){
+	if(this.body.y < this.levelArray[this.stopFloor] + 2 && this.body.y > this.levelArray[this.stopFloor] - 2){
 		this.body.velocity.y = 0;
 		this.cond = 'stop';
+		this.currentFloor = this.stopFloor;
 		this.stopFloor = null;
 	}else if(this.cond == 'move'){
 		this.body.velocity.y = this.speed;
+		this.currentFloor = null;
 	}
 }

@@ -9,17 +9,8 @@ TutorialGameplay.prototype = {
 		text.anchor.y = 0.5;
 		game.stage.backgroundColor = "#ffffff";
 
-		 this.Dorm = game.add.sprite(game.world.centerX, game.world.centerY - 100,'DormA');
-		 this.Dorm.anchor.x = 0.5;
-		 this.Dorm.anchor.y = 0.5;
-		 this.Dorm.scale.x = 0.8;
-		 this.Dorm.scale.y = 0.8;
-		 //470 120
+		Gameplay(game);
 
-		 this.elevator = new Elevator(game, 400, 470, 'Diamond', 1, 5, 470, 120);
-		 game.add.existing(this.elevator);
-
-		 console.log(this.elevator.body.y);
 	},
 
 	update: function() {
