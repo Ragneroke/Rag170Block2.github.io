@@ -20,8 +20,6 @@ Load.prototype = {
 		game.load.spritesheet('singer', 'singerCharacter.png', 1200, 1600);
 		game.load.spritesheet('drumer', 'drumCharacter.png', 4000, 3000);
 
-		//Load AUDIO assets
-		game.load.path = 'assets/audio/';
 	},
 
 	create: function() {
